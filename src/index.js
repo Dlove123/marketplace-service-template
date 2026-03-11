@@ -5,7 +5,7 @@
 
 const express = require('express');
 const cors = require('cors');
-const x402 = require('x402');
+const { x402Middleware } = require('./middleware/payment');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,14 +14,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// x402支付中间件
-app.use(x402.middleware({
-  price: {
-    search: 0.01,      // $0.01 USDC per search
-    listing: 0.005,    // $0.005 USDC per listing
-    monitor: 0.02      // $0.02 USDC per monitor check
-  }
-}));
+// x402支付验证中间件
+app.use(x402Middleware(true));
 
 // 路由
 app.use('/api/marketplace/search', require('./routes/search'));
