@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "name": "facebook-marketplace-api",
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.js"
+    }
+  ],
+  "env": {
+    "PROXIES_SX_URL": "@proxies-sx-url",
+    "X402_WALLET": "@x402-wallet"
+  }
+}
